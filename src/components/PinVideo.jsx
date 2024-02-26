@@ -33,13 +33,14 @@ const PinVideo = ({ data }) => {
         justifyContent:'space-between',
         cursor:'pointer',
         overflow:"hidden",
-        maxWidth:'300px',
-        height:'120px',
+        width:'300px',
+        height:'140px',
         bgcolor:'#e7fcfc'
        }}
     >
       <Box sx={{
         width:'100%',
+        objectFit:'contain',
         display:'flex',
         alignItems:'center',
         justifyContent:'center'

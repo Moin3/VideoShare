@@ -69,10 +69,11 @@ const Feed = () => {
   return (
 
     <Box sx={{
-      py:4
+      py:4,
+     width:'100%'
     }}>
 
-      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+      <Grid container spacing={{ xs: 2, md: 3 }} sx={{display:'flex',justifyContent:'center',alignItems:'center'}} >
         { feeds && feeds.map((data, index) => (
           <Grid item  key={index}>
             <Item>
