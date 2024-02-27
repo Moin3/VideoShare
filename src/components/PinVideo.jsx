@@ -33,7 +33,7 @@ const PinVideo = ({ data }) => {
         justifyContent:'space-between',
         cursor:'pointer',
         overflow:"hidden",
-        width:{xs:'300px',sm:'240px',md:'300px'},
+        width:{xs:'300px',sm:'200px',md:'240px',lg:'300px'},
         height:'150px',
         bgcolor:'#e7fcfc',
         position:'relative'
@@ -45,7 +45,7 @@ const PinVideo = ({ data }) => {
             muted
             onMouseOver={(e) => e.target.play()}
             onMouseOut={(e) => e.target.pause()}
-            style={{width:'100%',position:'absolute',top:0,left:0}}
+            style={{width: '100%',height: '100%',position:'absolute',top:0,left:0,objectFit:'cover'}}
           />
         </Link>
     </Box>

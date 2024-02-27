@@ -89,14 +89,3 @@ const Feed = () => {
 
 
 export default Feed
-
-{/* <Grid container >
-        <Grid item xs={3}>
-          <Item>
-          {feeds &&
-            feeds.map((data) => (
-              <PinVideo key={data.id} maxWidth={420} height="80px" data={data} />
-            ))}
-          </Item>
-        </Grid>
-      </Grid> */}
