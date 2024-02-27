@@ -128,10 +128,11 @@ const Create = () => {
 
 
   return (
+   <Box sx={{width:'100%',display:'flex',justifyContent:'center'}}>
     <Box
     sx={{
         width:"90%",
-        height:'700px',
+        height:'750px',
         border:'1px solid gray',
         borderRadius:'5px',
         marginTop:'20px',
@@ -256,7 +257,7 @@ const Create = () => {
         <Box
         sx={{
             marginTop:'20px',
-            width:'80%',
+            width:{xs:'90%',sm:'60%'},
             marginLeft:'50%',
             transform:'translateX(-50%)'
             
@@ -267,7 +268,8 @@ const Create = () => {
 			ref={editor}
 			value={content}
 			tabIndex={1} // tabIndex of textarea
-			onChange={newContent => setContent(newContent)}
+			onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
+			onChange={newContent => {}}
 		/>
         <Button 
             
@@ -285,6 +287,7 @@ const Create = () => {
         </Box>
         
     </Box>
+   </Box>
   )
 }
 
