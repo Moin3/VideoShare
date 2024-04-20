@@ -56,7 +56,7 @@ const PinVideo = ({ data }) => {
         alignItems:'center',
         justifyContent:'space-between',
         width:'100%',
-        maxWidth:'300px',
+        maxWidth:'300px'
       }}>
         <Link to={`/userDetail/${userId}`}>
             <Avatar
@@ -72,14 +72,21 @@ const PinVideo = ({ data }) => {
           }}
         >
           <Typography 
-              sx={{
-                fontSize:'13px',
-                color:'black',
-                textAlign:'right',
-                fontWeight:'bold'
-              }}>
-                {data.title}
+            sx={{
+              fontSize:'12px',
+              color:'black',
+              textAlign:'right',
+              fontWeight:'bold',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              maxWidth: '150px',
+              mt:'8px'
+            }}
+          >
+            {data.title}
           </Typography>
+
 
           <Typography sx={{
               fontSize:'11px',

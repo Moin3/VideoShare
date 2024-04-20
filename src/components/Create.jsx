@@ -22,8 +22,8 @@ const Create = () => {
     const editor = useRef(null);
     const [content, setContent] = useState('');
 
-    const [title,setTitle]=useState('')
-    const [category, setCategory] = useState('Select a Catagory')
+    const [title,setTitle]=useState(null)
+    const [category, setCategory] = useState(null)
     const [location,setLocation]=useState('')
     const [videoAsset, setVideoAsset] = useState(null)
     const [loading, setLoading] = useState(false)
@@ -91,40 +91,75 @@ const Create = () => {
           });
     }
 
-    const uploadDetails=async()=>{
-        try{
-            setLoading(true)
-            if (!title && !category && !videoAsset) {
+    // const uploadDetails=async()=>{
+    //     try{
+    //         // setLoading(true)
+    //         if (!title && !category && !videoAsset) {
+    //             setAlert(true);
+    //             setAlertStatus("error");
+    //             setAlertMsg("Fill this empty field");
+    //             setTimeout(() => {
+    //               setAlert(false);
+    //             }, 4000);
+    //             setLoading(false);
+    //           } else {
+    //             const data = {
+    //               id: `${Date.now()}`,
+    //               title: title,
+    //               userId: userInfo?.uid,
+    //               category: category,
+    //               location: location,
+    //               videoUrl: videoAsset,
+    //               content: content,
+    //             };
+        
+    //             await setDoc(doc(db, "videos", `${Date.now()}`), data);
+    //             setLoading(false);
+    //             navigate("/", { replace: true });
+    //           }
+    //     }catch(err){
+    //         console.log(err)
+    //     }
+    // }
+
+    const uploadDetails = async () => {
+        try {
+            setLoading(true);
+    
+            // Check if any of the required fields are empty
+            if (!title || !category || !videoAsset || !location || !content) {
                 setAlert(true);
                 setAlertStatus("error");
-                setAlertMsg("Fill this empty field");
+                setAlertMsg("Please fill all required fields");
                 setTimeout(() => {
-                  setAlert(false);
+                    setAlert(false);
                 }, 4000);
                 setLoading(false);
-              } else {
-                const data = {
-                  id: `${Date.now()}`,
-                  title: title,
-                  userId: userInfo?.uid,
-                  category: category,
-                  location: location,
-                  videoUrl: videoAsset,
-                  content: content,
-                };
-        
-                await setDoc(doc(db, "videos", `${Date.now()}`), data);
-                setLoading(false);
-                navigate("/", { replace: true });
-              }
-        }catch(err){
-            console.log(err)
+                return;
+            }
+    
+            const data = {
+                id: `${Date.now()}`,
+                title: title,
+                userId: userInfo?.uid,
+                category: category,
+                location: location,
+                videoUrl: videoAsset,
+                content: content,
+            };
+    
+            await setDoc(doc(db, "videos", `${Date.now()}`), data);
+            setLoading(false);
+            navigate("/", { replace: true });
+        } catch (err) {
+            console.log(err);
         }
-    }
+    };
+    
 
-    useEffect(()=>{
+    // useEffect(()=>{
         
-    },[title,category,location,content,])
+    // },[title,category,location,content])
 
 
   return (
@@ -132,14 +167,11 @@ const Create = () => {
     <Box
     sx={{
         width:"90%",
-        height:'750px',
+        height:'800px',
         border:'1px solid gray',
         borderRadius:'5px',
         marginTop:'20px',
         marginBottom:'20px',
-       
-       
-
     }}
   >
         {alert && (
@@ -147,17 +179,17 @@ const Create = () => {
         )}
     
         <Box >
-        <TextField id="filled-basic" label="Title" variant="filled" value={title} onChange={(e)=>setTitle(e.target.value)} fullWidth type='text'/>
+        <TextField id="filled-basic" label="Title" variant="filled" required value={title} onChange={(e)=>setTitle(e.target.value)} fullWidth type='text'/>
         <Stack direction="row" spacing={5} sx={{mt:3 ,display:'flex',flexWrap:'wrap',justifyContent:'center',alignItems:'center'}}>
             <Box sx={{ minWidth:'250px'}}>
             <FormControl sx={{  m: 1,width:'100%'}} size="small">
-                <InputLabel id="demo-select-small">{category}</InputLabel>
+                <InputLabel id="demo-select-small">Categories</InputLabel>
                 <Select
                     labelId="demo-select-small"
                     id="demo-select-small"
-                    label={category}
+                    label="Categories"
                     value={category}
-                    
+                    required
                 >
                     {categories && categories.map(data=>(
                         <MenuItem key={data.id} 
@@ -172,16 +204,18 @@ const Create = () => {
             </FormControl>
             </Box>
 
-            <Box sx={{ display: 'flex', alignItems: 'center',minWidth:'250px',mr:2 }}>
-                
+            <Box sx={{ display: 'flex', alignItems: 'center',minWidth:'250px',mr:2 }}> 
                 <TextField id="outlined-basic" 
-                label={<LocationOnOutlinedIcon 
-                sx={{ color: 'action.active', mr: 1, }} 
-                /> } placeholder='Location'
-                variant="outlined" size="small" 
-                type='text' value={location} 
-                onChange={(e)=>setLocation(e.target.value)} 
-                sx={{width:'100%',marginRight:3 }}/>
+                    label={<LocationOnOutlinedIcon sx={{color: 'action.active'}}/> }
+                    placeholder='Location'
+                    variant="outlined"
+                    size="small" 
+                    type='text'
+                    value={location} 
+                    onChange={(e)=>setLocation(e.target.value)} 
+                    sx={{width:'100%',marginRight:3 }}
+                    required
+                />
             </Box>
         </Stack>
         <Box
@@ -206,7 +240,7 @@ const Create = () => {
 
             }}
             >
-                <TextField id="addVid" variant="outlined" type='file' name='upload-img' onChange={uploadImg} accept="video/mp4,video/x-m4v,video/*" sx={{border:'none',display:'none'}}/>
+                <TextField required id="addVid" variant="outlined" type='file' name='upload-img' onChange={uploadImg} accept="video/mp4,video/x-m4v,video/*" sx={{border:'none',display:'none'}}/>
                 {loading ?
                  (<>
                  <Spinner msg={'Uploading Your Video'} progressState={progressState}/>
@@ -272,7 +306,6 @@ const Create = () => {
 			onChange={newContent => {}}
 		/>
         <Button 
-            
             variant={`${loading ? "outline" : "contained"}`}
             onClick={()=>uploadDetails()}
             sx={{

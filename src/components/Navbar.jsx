@@ -11,7 +11,7 @@ import Menu from '@mui/material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
 import NaturePeopleOutlinedIcon from '@mui/icons-material/NaturePeopleOutlined';
-import { Avatar } from '@mui/material';
+import { Avatar, Tooltip } from '@mui/material';
 import { Link  } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
@@ -122,9 +122,11 @@ export default function Navbar({user}) {
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: "flex" }}>
             <Link  to={'/create'} style={{ textDecoration: 'none', color: 'white' }} >
-                <IconButton size="large" color="inherit" style={{marginTop:'3px'}}>
-                    <AddIcon />
-                </IconButton>
+              <Tooltip title={'Upload Video'} placement="left" arrow>
+                  <IconButton size="small" style={{marginTop:'12px',backgroundColor:'white',color:'blue'}}>
+                      <AddIcon />
+                  </IconButton>
+                </Tooltip>
             </Link>
             <IconButton
               size="large"
@@ -135,7 +137,7 @@ export default function Navbar({user}) {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-                {user && (<Avatar alt="Remy Sharp" style={{width:'30px',height:'30px'}} src={user.photoURL}  />)}
+                {user && (<Avatar alt="Remy Sharp" style={{width:'35px',height:'35px'}} src={user.photoURL}  />)}
             </IconButton>
           </Box>
         </Toolbar>
