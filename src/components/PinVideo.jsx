@@ -17,7 +17,7 @@ const PinVideo = ({ data }) => {
   const [userInfo, setUserInfo] = useState(null);
 
   useEffect(() => {
-    if (data) setUserId(data.userId);
+    if (data) setUserId(data?.userId);
     if (userId)
       gertUserInfo(db, userId).then((data) => {
         setUserInfo(data);
@@ -41,11 +41,11 @@ const PinVideo = ({ data }) => {
     >
         <Link to={`/videoDetail/${data?.id}`}>
           <video
-            src={data.videoUrl}
+            src={data?.videoUrl}
             muted
             onMouseOver={(e) => e.target.play()}
             onMouseOut={(e) => e.target.pause()}
-            style={{width: '100%',height: '100%',position:'absolute',top:0,left:0,objectFit:'cover'}}
+            style={{width: '100%',height: '100%',position:'absolute',top:0,left:0,objectFit:'cover',borderRadius:'5px'}}
           />
         </Link>
     </Box>
@@ -84,7 +84,7 @@ const PinVideo = ({ data }) => {
               mt:'8px'
             }}
           >
-            {data.title}
+            {data?.title}
           </Typography>
 
 
@@ -95,7 +95,7 @@ const PinVideo = ({ data }) => {
               fontStyle: 'italic'
               
             }}>
-              {moment(new Date(parseInt(data.id)).toISOString()).fromNow()}
+              {moment(new Date(parseInt(data?.id)).toISOString()).fromNow()}
           </Typography>
         </Box>
       </Box>

@@ -10,7 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
-import NaturePeopleOutlinedIcon from '@mui/icons-material/NaturePeopleOutlined';
+import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
 import { Avatar, Tooltip } from '@mui/material';
 import { Link  } from 'react-router-dom';
 
@@ -53,6 +53,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+
+
+
 export default function Navbar({user}) { 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -73,7 +76,7 @@ export default function Navbar({user}) {
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
-        vertical: 'top',
+        vertical: 'bottom',
         horizontal: 'right',
       }}
       id={menuId}
@@ -97,13 +100,11 @@ export default function Navbar({user}) {
         <Toolbar>
           <Link  to={'/'} style={{ textDecoration: 'none', color: 'white' }} >
             <MenuItem>
-                <IconButton size="large"  color="inherit">
-                    <NaturePeopleOutlinedIcon />
-                </IconButton>
+                <PlayCircleFilledIcon sx={{color:'black',bgcolor:'orangered',borderRadius:'100%',overflow:'hidden'}}/>
                 <Typography
                     noWrap
                     component="div"
-                    sx={{ display: { xs: 'none', sm: 'block' } }}
+                    sx={{ display: { xs: 'none', sm: 'block' },ml:1 }}
                 >
                 VidShare
             </Typography>

@@ -77,7 +77,7 @@ const Feed = () => {
         { feeds && feeds.map((data, index) => (
           <Grid item  key={index}>
             <Item>
-              <PinVideo key={data.id}  data={data} />
+              <PinVideo key={data?.id}  data={data} />
             </Item>
           </Grid>
         ))}

@@ -7,12 +7,15 @@ const NotFound = () => {
     <Box
     sx={{
         width:'100%',
+        height:'70vh',
+        display:'flex',
         justifyContent:'center',
         alignItems:'center',
-        flexDirection:'column'
+        flexDirection:'column',
+        mt:6
     }}
     >
-      <img src={notFoundSvg} style={{width:'600px'}} />
+      <img src={notFoundSvg} style={{widht:'100%',height:'90%',objectFit:'contain'}} />
       <Typography sx={{
         fontSize:'40px',
         fontWeight:'semibold',

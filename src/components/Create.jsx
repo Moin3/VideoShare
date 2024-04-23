@@ -6,8 +6,8 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import QueueIcon from '@mui/icons-material/Queue';
 import Spinner from './Spinner';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import AlertMessage from './AlertMessage';
 import JoditEditor from 'jodit-react';
+import toast from 'react-hot-toast';
 
 import { fetchUser } from "../utils/fetchUser";
 import { doc, getFirestore, setDoc } from "firebase/firestore";
@@ -30,7 +30,6 @@ const Create = () => {
     const [progressState, setProgressState] = useState(1)
     const [alert, setAlert] = useState(false);
     const [alertStatus, setAlertStatus] = useState("");
-    const [alertMsg, setAlertMsg] = useState("");
     const [userInfo] = fetchUser();
     const navigate = useNavigate();
 
@@ -65,7 +64,7 @@ const Create = () => {
         setLoading(false)
         setAlert(true);
         setAlertStatus("success");
-        setAlertMsg("Video Successfully Uploded");
+        toast.error("Video Successfully Uploded");
         setTimeout(() => {
         setAlert(false);
         }, 4000);
@@ -82,7 +81,7 @@ const Create = () => {
             setVideoAsset(null)
             setAlert(true);
             setAlertStatus("error");
-            setAlertMsg("Video is deleted");
+            toast.success("Video is deleted");
             setTimeout(() => {
             setAlert(false);
             }, 4000);
@@ -91,46 +90,13 @@ const Create = () => {
           });
     }
 
-    // const uploadDetails=async()=>{
-    //     try{
-    //         // setLoading(true)
-    //         if (!title && !category && !videoAsset) {
-    //             setAlert(true);
-    //             setAlertStatus("error");
-    //             setAlertMsg("Fill this empty field");
-    //             setTimeout(() => {
-    //               setAlert(false);
-    //             }, 4000);
-    //             setLoading(false);
-    //           } else {
-    //             const data = {
-    //               id: `${Date.now()}`,
-    //               title: title,
-    //               userId: userInfo?.uid,
-    //               category: category,
-    //               location: location,
-    //               videoUrl: videoAsset,
-    //               content: content,
-    //             };
-        
-    //             await setDoc(doc(db, "videos", `${Date.now()}`), data);
-    //             setLoading(false);
-    //             navigate("/", { replace: true });
-    //           }
-    //     }catch(err){
-    //         console.log(err)
-    //     }
-    // }
-
     const uploadDetails = async () => {
         try {
             setLoading(true);
-    
-            // Check if any of the required fields are empty
             if (!title || !category || !videoAsset || !location || !content) {
                 setAlert(true);
                 setAlertStatus("error");
-                setAlertMsg("Please fill all required fields");
+                toast.error("Please fill all required fields");
                 setTimeout(() => {
                     setAlert(false);
                 }, 4000);
@@ -157,27 +123,19 @@ const Create = () => {
     };
     
 
-    // useEffect(()=>{
-        
-    // },[title,category,location,content])
-
 
   return (
    <Box sx={{width:'100%',display:'flex',justifyContent:'center'}}>
     <Box
-    sx={{
-        width:"90%",
-        height:'800px',
-        border:'1px solid gray',
-        borderRadius:'5px',
-        marginTop:'20px',
-        marginBottom:'20px',
-    }}
+        sx={{
+            width:"90%",
+            height:'800px',
+            border:'1px solid gray',
+            borderRadius:'5px',
+            marginTop:'20px',
+            marginBottom:'20px',
+        }}
   >
-        {alert && (
-            <AlertMessage status={alertStatus} msg={alertMsg}  />
-        )}
-    
         <Box >
         <TextField id="filled-basic" label="Title" variant="filled" required value={title} onChange={(e)=>setTitle(e.target.value)} fullWidth type='text'/>
         <Stack direction="row" spacing={5} sx={{mt:3 ,display:'flex',flexWrap:'wrap',justifyContent:'center',alignItems:'center'}}>
@@ -214,7 +172,6 @@ const Create = () => {
                     value={location} 
                     onChange={(e)=>setLocation(e.target.value)} 
                     sx={{width:'100%',marginRight:3 }}
-                    required
                 />
             </Box>
         </Stack>

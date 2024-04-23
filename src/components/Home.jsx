@@ -3,11 +3,12 @@ import Navbar from './Navbar'
 import { Route, Routes } from 'react-router-dom'
 import Feed from './Feed'
 import Create from './Create'
-import PinVideo from './PinVideo'
 import Search from './Search'
 import Category from './Category'
 import Box from '@mui/material/Box';
 import { categories } from '../data'
+import VideoPinDetails from './VideoPinDetails'
+import UserDetails from './UserDetails'
 
 
 
@@ -24,7 +25,8 @@ const Home = ({user}) => {
                 <Route path='/' element={<Feed/>}/>
                 <Route path='/category/:categoryId' element={<Feed/>}/>
                 <Route path='/create' element={<Create/>}/>
-                <Route path='/videoDetail/:videoId' element={<PinVideo/>}/>
+                <Route path='/videoDetail/:videoId' element={<VideoPinDetails/>}/>
+                <Route path='/userDetail/:userId' element={<UserDetails/>}/>
                 <Route path='/search' element={<Search/>}/>
             </Routes>
         </Box>
