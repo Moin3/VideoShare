@@ -27,9 +27,7 @@ const Create = () => {
     const [location,setLocation]=useState('')
     const [videoAsset, setVideoAsset] = useState(null)
     const [loading, setLoading] = useState(false)
-    const [progressState, setProgressState] = useState(1)
-    const [alert, setAlert] = useState(false);
-    const [alertStatus, setAlertStatus] = useState("");
+    const [progressState, setProgressState] = useState(null)
     const [userInfo] = fetchUser();
     const navigate = useNavigate();
 
@@ -42,7 +40,6 @@ const Create = () => {
     // Uploade Video
 
     const uploadImg=(e)=>{
-        // console.log(e.target.files[0])
         setLoading(true)
         const videoFile=e.target.files[0]
         const storageRef=ref(storage,`videos/${Date.now()}-${videoFile.name}`)
@@ -62,12 +59,7 @@ const Create = () => {
     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
         setVideoAsset(downloadURL)
         setLoading(false)
-        setAlert(true);
-        setAlertStatus("success");
-        toast.error("Video Successfully Uploded");
-        setTimeout(() => {
-        setAlert(false);
-        }, 4000);
+        toast.success("Video Successfully Uploded");
     });
   })
     }
@@ -79,12 +71,7 @@ const Create = () => {
 
         deleteObject(deleteRef).then(() => {
             setVideoAsset(null)
-            setAlert(true);
-            setAlertStatus("error");
             toast.success("Video is deleted");
-            setTimeout(() => {
-            setAlert(false);
-            }, 4000);
           }).catch((error) => {
             console.log(error)
           });
@@ -94,12 +81,7 @@ const Create = () => {
         try {
             setLoading(true);
             if (!title || !category || !videoAsset || !location || !content) {
-                setAlert(true);
-                setAlertStatus("error");
                 toast.error("Please fill all required fields");
-                setTimeout(() => {
-                    setAlert(false);
-                }, 4000);
                 setLoading(false);
                 return;
             }
@@ -129,11 +111,13 @@ const Create = () => {
     <Box
         sx={{
             width:"90%",
-            height:'800px',
+            // height:'800px',
+            height:'auto',
             border:'1px solid gray',
             borderRadius:'5px',
             marginTop:'20px',
             marginBottom:'20px',
+            paddingBottom:'20px'
         }}
   >
         <Box >
@@ -258,13 +242,14 @@ const Create = () => {
         <JoditEditor
 			ref={editor}
 			value={content}
-			tabIndex={1} // tabIndex of textarea
-			onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
+			tabIndex={1} 
+			onBlur={newContent => setContent(newContent)}
 			onChange={newContent => {}}
 		/>
         <Button 
             variant={`${loading ? "outline" : "contained"}`}
             onClick={()=>uploadDetails()}
+            disabled={loading}
             sx={{
                 mt:4,
                 width:'300px,',
@@ -272,7 +257,7 @@ const Create = () => {
                 transform:'translateX(-50%)'
             }}
         >
-            Upload
+            {loading ? 'Uploading...' : 'Upload'}
         </Button>
         </Box>
         
