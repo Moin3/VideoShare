@@ -1,4 +1,3 @@
-import { firebaseapp } from "../firebase-config";
 
 import {collection, deleteDoc, doc, getDoc, getDocs, orderBy, query, where} from 'firebase/firestore';
 
@@ -19,7 +18,19 @@ export const gertUserInfo = async (firestoreDb, userId) => {
     if (userSnap.exists()) {
       return userSnap.data();
     } else {
-      return "No Such Document";
+      return "There is no Such Document";
     }
   };
+
+
+// fetch the specific Video
+export const getSpecificVideo = async (firestoreDb, id) => {
+  const videoRef = doc(firestoreDb, "videos", id);
+  const videoSnap = await getDoc(videoRef);
+  if (videoSnap.exists()) {
+    return videoSnap.data();
+  } else {
+    return "There is no Such Document";
+  }
+};
   

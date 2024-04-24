@@ -22,9 +22,10 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const Feed = () => {
   const db = getFirestore(firebaseapp);
-
   const [feeds, setFeeds] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  
   // const { categoryId } = useParams();
 
   // useEffect(() => {

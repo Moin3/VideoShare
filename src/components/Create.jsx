@@ -111,7 +111,6 @@ const Create = () => {
     <Box
         sx={{
             width:"90%",
-            // height:'800px',
             height:'auto',
             border:'1px solid gray',
             borderRadius:'5px',
