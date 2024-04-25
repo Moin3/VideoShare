@@ -52,8 +52,8 @@ const VideoPinDetails = () => {
     );
 
   return ( 
-    <Box sx={{display:'flex',flexDirection:'column',gap:3}}>
-        <Box sx={{mt:5}}>
+    <Box sx={{display:'flex',flexDirection:'column',gap:{xs:1,sm:2,md:3}}}>
+        <Box sx={{mt:{xs:1,sm:3,md:5}}}>
             <Stack
                 direction="row"
                 divider={<Divider orientation="vertical" flexItem />}
@@ -65,8 +65,13 @@ const VideoPinDetails = () => {
                 <Typography>{videoInfo?.category}</Typography>
             </Stack>
         </Box>
-        <Box>
-            <ReactPlayer url={`${videoInfo?.videoUrl}`} />
+        <Box sx={{minWidth:'350px',display:'flex',alignItems:'center'}}>
+            <ReactPlayer
+                url={`${videoInfo?.videoUrl}`}
+                controls={true}
+                volume={0.2}
+                height={'100%'}
+            />
         </Box>
     </Box>
   )
