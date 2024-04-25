@@ -1,28 +1,56 @@
-import { Box, Divider, Stack, Typography } from '@mui/material'
+import { Alert, Avatar, Box, Button, Divider, Paper, Stack, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import CameraIndoorIcon from '@mui/icons-material/CameraIndoor';
-import { Link, useParams } from 'react-router-dom';
-import { getSpecificVideo } from '../utils/fetchData';
+import DeleteIcon from '@mui/icons-material/Delete';
+import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
+import CloseIcon from '@mui/icons-material/Close';
+import DoneIcon from '@mui/icons-material/Done';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { deleteVideo, gertUserInfo, getSpecificVideo } from '../utils/fetchData';
 import { getFirestore } from 'firebase/firestore';
 import firebaseapp from '../firebase-config';
 import Spinner from './Spinner';
 import ReactPlayer from 'react-player/lazy'
 import moment from 'moment';
+import { fetchUser } from '../utils/fetchUser';
 
 
 
 
 
 
-
+const avatar ="https://ak.picdn.net/contributors/3038285/avatars/thumb.jpg?t=164360626";
 
 const VideoPinDetails = () => {
     const db = getFirestore(firebaseapp);
     const {videoId}=useParams()
-    
+    const navigate = useNavigate();
+    const [localUser] = fetchUser();
 
+    const [open, setOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [videoInfo, setVideoInfo] = useState(null);
+    const [userInfo, setUserInfo] = useState(null);
+
+
+    const handleClickOpen = () => {
+        setOpen(true);
+      };
+    
+    const handleClose = () => {
+        setOpen(false);
+      };
+    
+    const deleteSpecificVideo=(videoId)=>{
+        setIsLoading(true);
+        deleteVideo(db,videoId)
+        setIsLoading(false);
+        navigate("/", { replace: true });
+
+    }
+
+
+    
 
 
     useEffect(()=>{
@@ -31,6 +59,9 @@ const VideoPinDetails = () => {
             setIsLoading(true);
             getSpecificVideo(db, videoId).then((data) => {
               setVideoInfo(data);
+              gertUserInfo(db, data.userId).then((user) => {
+                setUserInfo(user);
+              });
               setIsLoading(false);
             });
           }
@@ -51,6 +82,9 @@ const VideoPinDetails = () => {
         <Spinner />
     </Box>
     );
+
+        
+
 
   return ( 
     <Box sx={{display:'flex',flexDirection:'column',gap:{xs:1,sm:2,md:3}}}>
@@ -81,19 +115,67 @@ const VideoPinDetails = () => {
             }}>
               🌍 {videoInfo?.location}
             </Typography>
-            <Typography sx={{
-                fontSize:'11px',
-                color:'black',
-                fontStyle: 'italic'
-            }}>
-                {moment(new Date(parseInt(videoInfo?.id)).toISOString()).fromNow()}
-            </Typography>
+           {
+            videoInfo?.id && (
+                <>
+                 <Typography sx={{
+                    fontSize:'11px',
+                    color:'black',
+                    fontStyle: 'italic'
+                }}>
+                    {moment(new Date(parseInt(videoInfo.id)).toISOString()).fromNow()}
+                </Typography>
+                </>
+            )
+           }
           </Box>
 
-          <Box sx={{fontWeight:'Bold',fontSize:'25px',mt:1}}>
+          <Box sx={{fontWeight:'bold',fontSize:'25px',mt:1}}>
             🎬 {videoInfo?.title} 📽️
           </Box>
-            
+          <Paper elevation={0} sx={{height:"100%",display:'flex',alignItems:'center',p:1,mt:2,bgcolor:'#edf0f7'}}>
+            <Box sx={{display:'flex',width:'100%',justifyContent:'space-between',alignItems:'center'}}>
+                <Link to={`/userDetail/${videoInfo?.userId}`} style={{textDecoration:'none',color:'black',display:'flex',flexDirection:'row',gap:4,alignItems:'center'}}>
+                    <Avatar
+                        src={userInfo?.photoURL ? userInfo?.photoURL : avatar}
+                        sx={{ width: 35, height: 35 }}
+                    />
+                    <Typography sx={{fontSize:'20px',fontWeight:'bold'}}>
+                        {userInfo?.displayName}
+                    </Typography>
+                </Link>
+                {
+                    userInfo?.uid === localUser.uid && (
+                        <Button>
+                            <DeleteIcon sx={{color:'orangered'}} onClick={handleClickOpen}/>
+                        </Button>
+                    )
+                }
+                <Button>
+                    <DownloadForOfflineIcon sx={{color:'teal'}}/>
+                </Button>
+            </Box>  
+          </Paper>
+          {
+            open && (
+                <Alert 
+                    sx={{mt:2}}
+                    severity="error"
+                    action={
+                        <>
+                            <Button color="inherit" size="small" onClick={()=>deleteSpecificVideo(videoId)}>
+                                <DoneIcon/>
+                            </Button>
+                            <Button color="inherit" size="small" onClick={handleClose}>
+                                <CloseIcon/>
+                            </Button>
+                        </>
+                      }
+                >
+                      Do you want to Delete this video?
+                </Alert>
+            )
+          }
         </Box>
     </Box>
   )

@@ -21,6 +21,7 @@ const PinVideo = ({ data }) => {
     if (userId)
       gertUserInfo(db, userId).then((data) => {
         setUserInfo(data);
+       
       });
   }, [userId]);
 
@@ -63,7 +64,7 @@ const PinVideo = ({ data }) => {
               src={userInfo?.photoURL ? userInfo?.photoURL : avatar}
               sx={{ width: 25, height: 25 }}
             />
-          </Link>
+        </Link>
         <Box 
           sx={{
             display:'flex',
