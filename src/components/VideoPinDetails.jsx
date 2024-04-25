@@ -7,6 +7,7 @@ import { getFirestore } from 'firebase/firestore';
 import firebaseapp from '../firebase-config';
 import Spinner from './Spinner';
 import ReactPlayer from 'react-player/lazy'
+import moment from 'moment';
 
 
 
@@ -65,13 +66,34 @@ const VideoPinDetails = () => {
                 <Typography>{videoInfo?.category}</Typography>
             </Stack>
         </Box>
-        <Box sx={{minWidth:'350px',display:'flex',alignItems:'center'}}>
+        <Box sx={{maxWidth:'640px',display:'flex',flexDirection:'column'}}>
             <ReactPlayer
                 url={`${videoInfo?.videoUrl}`}
                 controls={true}
                 volume={0.2}
-                height={'100%'}
+                width='100%'
+                // height={'100%'}
             />
+            <Box sx={{display:'flex',flexDirection:'row',justifyContent:'space-between',mx:1,mt:1}}>
+            <Typography sx={{
+                fontSize:'11px',
+                color:'black'
+            }}>
+              🌍 {videoInfo?.location}
+            </Typography>
+            <Typography sx={{
+                fontSize:'11px',
+                color:'black',
+                fontStyle: 'italic'
+            }}>
+                {moment(new Date(parseInt(videoInfo?.id)).toISOString()).fromNow()}
+            </Typography>
+          </Box>
+
+          <Box sx={{fontWeight:'Bold',fontSize:'25px',mt:1}}>
+            🎬 {videoInfo?.title} 📽️
+          </Box>
+            
         </Box>
     </Box>
   )
