@@ -25,23 +25,8 @@ const Feed = () => {
   const [feeds, setFeeds] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  
-  // const { categoryId } = useParams();
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   if (categoryId) {
-  //     categoryFeeds(db, categoryId).then((data) => {
-  //       setFeeds(data);
-  //       setLoading(false);
-  //     });
-  //   } else {
-  //     getAllFeeds(db).then((data) => {
-  //       setFeeds(data);
-  //       setLoading(false);
-  //     });
-  //   }
-  // }, [categoryId]);
+
   useEffect(()=>{
     setLoading(true);
     getAllFeeds(db).then((data) => {
@@ -71,12 +56,12 @@ const Feed = () => {
 
     <Box sx={{
       py:4,
-     width:'100%'
+      width:'100%'
     }}>
 
       <Grid container spacing={{ xs: 2, md: 3 }} sx={{display:'flex',justifyContent:'center',alignItems:'center'}} >
         { feeds && feeds.map((data, index) => (
-          <Grid item  key={index}>
+          <Grid item  key={index} >
             <Item>
               <PinVideo key={data?.id}  data={data} />
             </Item>
