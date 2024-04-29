@@ -22,7 +22,7 @@ function App() {
    if(!accessToken){
     navigate('/login', { replace: true })
    }else{
-    navigate('/', { replace: true })
+    // navigate('/', { replace: true })
     const [userInfo]=fetchUser()
     setUser(userInfo)
    }

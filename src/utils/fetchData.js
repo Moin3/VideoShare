@@ -65,4 +65,17 @@ export const categoryFeeds = async (firestoreDb, categoryId) => {
 
   return feeds.docs.map((doc) => doc.data());
 };
+
+// useruploaded videos
+export const userUploadedVideos = async (firestoreDb, userId) => {
+  const feeds = await getDocs(
+    query(
+      collection(firestoreDb, "videos"),
+      where("userId", "==", userId),
+      orderBy("id", "desc")
+    )
+  );
+
+  return feeds.docs.map((doc) => doc.data());
+};
   

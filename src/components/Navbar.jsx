@@ -14,6 +14,8 @@ import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
 import { Avatar, Tooltip } from '@mui/material';
 import { Link, useNavigate  } from 'react-router-dom';
 
+
+
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -95,7 +97,7 @@ export default function Navbar({user}) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}><Link to={'/create'} style={{ textDecoration: 'none' ,color:'black' }}>Profile</Link></MenuItem>
+      <MenuItem onClick={handleMenuClose}><Link to={`/userDetail/${user?.uid}`} style={{ textDecoration: 'none' ,color:'black' }}>Profile</Link></MenuItem>
       <MenuItem onClick={()=>handleLogout()}>Logout</MenuItem>
     </Menu>
   );
@@ -145,7 +147,7 @@ export default function Navbar({user}) {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-                {user && (<Avatar alt="Remy Sharp" style={{width:'35px',height:'35px'}} src={user.photoURL}  />)}
+                {user && (<Avatar alt="Remy Sharp" style={{width:'35px',height:'35px'}} src={user?.photoURL}  />)}
             </IconButton>
           </Box>
         </Toolbar>

@@ -19,7 +19,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const RecommendedVideo = ({feeds}) => {
+const RecommendedVideo = ({feeds,xs,sm,md,lg}) => {
 
   return (
 
@@ -28,7 +28,7 @@ const RecommendedVideo = ({feeds}) => {
       width:'100%'
     }}>
 
-      <Grid container spacing={{ xs: 2, md: 3 }} sx={{display:'flex',justifyContent:'flex-start',alignItems:'center',flexDirection:{xs:'column',sm:'row',md:'column'}}} >
+      <Grid container spacing={{ xs: 2, md: 3 }} sx={{display:'flex',justifyContent:'flex-start',alignItems:'center',flexDirection:{xs:xs,sm:sm,md:md,lg:lg}}} >
         { feeds && feeds.map((data, index) => (
           <Grid item  key={index} >
             <Item>

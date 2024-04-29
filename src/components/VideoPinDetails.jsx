@@ -188,7 +188,7 @@ const VideoPinDetails = () => {
                         <Typography sx={{display:'flex',justifyContent:{xs:'center',sm:'flex-start',md:'center'},fontFamily:'Playfair Display',mt:3,fontWeight:'bold',fontSize:'20px',mt:5}}>
                             🔍 Recommended Video
                         </Typography>
-                        <RecommendedVideo feeds={feeds}/>
+                        <RecommendedVideo feeds={feeds} xs={"column"} sm={'row'} md={"row"} lg={'column'}/>
                     </>
                 )}
             </Box>

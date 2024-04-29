@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {Box}from '@mui/material';
 import Fab from '@mui/material/Fab';
 import { FcGoogle } from "react-icons/fc";
@@ -7,6 +7,7 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore ,setDoc,doc} from "firebase/firestore";
 import  firebaseapp  from '../firebase-config';
 import { useNavigate } from 'react-router-dom';
+import { userAccessToken } from '../utils/fetchUser';
 
 const Login = () => {
     const firebaseAuth=getAuth(firebaseapp)
@@ -31,6 +32,13 @@ const Login = () => {
         
         navigate('/',{replace:true})
     }
+
+    useEffect(() => {
+     const accessToken=userAccessToken()
+     if(accessToken){
+      navigate('/', { replace: true })
+     }
+    },[])
 
   return (
    
