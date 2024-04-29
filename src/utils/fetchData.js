@@ -52,4 +52,17 @@ export const recommendedFeed = async (firestoreDb, categoryId, videoId) => {
 
   return feeds.docs.map((doc) => doc.data());
 };
+
+// CategoryWise Feeds
+export const categoryFeeds = async (firestoreDb, categoryId) => {
+  const feeds = await getDocs(
+    query(
+      collection(firestoreDb, "videos"),
+      where("category", "==", categoryId),
+      orderBy("id", "desc")
+    )
+  );
+
+  return feeds.docs.map((doc) => doc.data());
+};
   

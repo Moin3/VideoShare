@@ -67,14 +67,14 @@ const VideoPinDetails = () => {
         return (
             <Box
                 sx={{
-                    display:'flex',
-                    alignItems:'center',
-                    justifyContent:'center',
-                    height:'100%',
-                    mr:5
+                width:'100%',
+                display:'flex',
+                alignItems:'center',
+                justifyContent:'center',
+                height:'100%',
                 }}
             >
-                <Spinner />
+                <Spinner msg={"Loading your feeds"} />
             </Box>
         );
     }

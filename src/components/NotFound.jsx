@@ -6,8 +6,8 @@ const NotFound = () => {
   return (
     <Box
     sx={{
-        width:'100%',
-        height:'70vh',
+        maxWidth:'400px',
+        height:'300px',
         display:'flex',
         justifyContent:'center',
         alignItems:'center',
@@ -15,7 +15,7 @@ const NotFound = () => {
         mt:6
     }}
     >
-      <img src={notFoundSvg} style={{widht:'100%',height:'90%',objectFit:'contain'}} />
+      <img src={notFoundSvg} style={{width:'100%',height:'100%',objectFit:'contain'}} />
       <Typography sx={{
         fontSize:'40px',
         fontWeight:'semibold',
