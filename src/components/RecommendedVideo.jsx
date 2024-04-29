@@ -19,37 +19,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const Feed = () => {
-  const db = getFirestore(firebaseapp);
-  const [feeds, setFeeds] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-
-
-  useEffect(()=>{
-    setLoading(true);
-    getAllFeeds(db).then((data) => {
-            setFeeds(data);
-            setLoading(false);
-          });
-  },[])
-
-  if (loading) {
-   return(
-      <Box
-        sx={{
-          display:'flex',
-          alignItems:'center',
-          justifyContent:'center',
-          height:'100%',
-          mr:5
-        }}
-      >
-       <Spinner msg={"Loading your feeds"} />
-      </Box>
-    )
-  };
-  if (!feeds?.length > 0) return <NotFound />;
+const RecommendedVideo = ({feeds}) => {
 
   return (
 
@@ -58,7 +28,7 @@ const Feed = () => {
       width:'100%'
     }}>
 
-      <Grid container spacing={{ xs: 2,sm:2, md: 2 }} sx={{display:'flex',justifyContent:'flex-start',alignItems:'center'}} >
+      <Grid container spacing={{ xs: 2, md: 3 }} sx={{display:'flex',justifyContent:'flex-start',alignItems:'center',flexDirection:{xs:'column',sm:'row',md:'column'}}} >
         { feeds && feeds.map((data, index) => (
           <Grid item  key={index} >
             <Item>
@@ -73,4 +43,4 @@ const Feed = () => {
 };
 
 
-export default Feed
+export default RecommendedVideo

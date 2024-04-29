@@ -5,7 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CloseIcon from '@mui/icons-material/Close';
 import DoneIcon from '@mui/icons-material/Done';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { deleteVideo, gertUserInfo, getSpecificVideo } from '../utils/fetchData';
+import { deleteVideo, gertUserInfo, getSpecificVideo, recommendedFeed } from '../utils/fetchData';
 import { getFirestore } from 'firebase/firestore';
 import firebaseapp from '../firebase-config';
 import Spinner from './Spinner';
@@ -13,7 +13,7 @@ import ReactPlayer from 'react-player'
 import moment from 'moment';
 import parse from 'html-react-parser';
 import { fetchUser } from '../utils/fetchUser';
-import Feed from './Feed';
+import RecommendedVideo from './RecommendedVideo';
 
 const avatar ="https://ak.picdn.net/contributors/3038285/avatars/thumb.jpg?t=164360626";
 
@@ -27,6 +27,7 @@ const VideoPinDetails = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [videoInfo, setVideoInfo] = useState(null);
     const [userInfo, setUserInfo] = useState(null);
+    const [feeds, setFeeds] = useState(null);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -49,6 +50,11 @@ const VideoPinDetails = () => {
             setIsLoading(true);
             getSpecificVideo(db, videoId).then((data) => {
                 setVideoInfo(data);
+
+                recommendedFeed(db, data.category, videoId).then((feed) => {
+                    setFeeds(feed);
+                  });
+
                 gertUserInfo(db, data.userId).then((user) => {
                     setUserInfo(user);
                 });
@@ -75,7 +81,7 @@ const VideoPinDetails = () => {
 
     return ( 
         <Box sx={{display:'flex',flexDirection:'row',flexWrap:'wrap'}}>
-            <Box sx={{display:'flex',flexDirection:'column',flexGrow:3,gap:{xs:1,sm:2,md:3}}}>
+            <Box sx={{display:'flex',flexDirection:'column',mr:2,flexGrow:3,gap:{xs:1,sm:2,md:3}}}>
                 <Box sx={{mt:{xs:1,sm:3,md:5}}}>
                     <Stack
                         direction="row"
@@ -177,10 +183,14 @@ const VideoPinDetails = () => {
                 </Box>
             </Box>
             <Box sx={{display:'flex',flexDirection:'column',flexGrow:2}}>
-                <Typography sx={{display:'flex',justifyContent:'center',fontFamily:'Playfair Display',mt:3,fontWeight:'bold',fontSize:'20px'}}>
-                🔍 Recommended Video
-                </Typography>
-                <Feed/>
+                {feeds && feeds.length > 0 && ( // Check if feeds is not null and has some content
+                    <>
+                        <Typography sx={{display:'flex',justifyContent:{xs:'center',sm:'flex-start',md:'center'},fontFamily:'Playfair Display',mt:3,fontWeight:'bold',fontSize:'20px',mt:5}}>
+                            🔍 Recommended Video
+                        </Typography>
+                        <RecommendedVideo feeds={feeds}/>
+                    </>
+                )}
             </Box>
         </Box>
     );

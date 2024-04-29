@@ -12,7 +12,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
 import { Avatar, Tooltip } from '@mui/material';
-import { Link  } from 'react-router-dom';
+import { Link, useNavigate  } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -57,6 +57,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 
 export default function Navbar({user}) { 
+  const navigate=useNavigate()
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
@@ -68,6 +69,12 @@ export default function Navbar({user}) {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
+
+  const handleLogout=()=>{
+    localStorage.clear()
+    navigate('/login')
+  }
+
 
 
 
@@ -89,7 +96,7 @@ export default function Navbar({user}) {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}><Link to={'/create'} style={{ textDecoration: 'none' ,color:'black' }}>Profile</Link></MenuItem>
-      <MenuItem onClick={handleMenuClose}><Link to={'/create'} style={{ textDecoration: 'none' ,color:'black' }}>Logout</Link></MenuItem>
+      <MenuItem onClick={()=>handleLogout()}>Logout</MenuItem>
     </Menu>
   );
 
