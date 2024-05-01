@@ -118,7 +118,7 @@ const UserProfile = () => {
           </Grid>
 
           {feeds && (
-            <Grid item xs={12}>
+            <Grid xs={12}>
               <Box mt={4}>
                 <RecommendedVideo
                   feeds={feeds}

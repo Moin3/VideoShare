@@ -7,12 +7,12 @@ import Box from '@mui/material/Box';
 
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(2),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }));
 
 const RecommendedVideo = ({feeds,xs,sm,md,lg}) => {
 
@@ -23,7 +23,7 @@ const RecommendedVideo = ({feeds,xs,sm,md,lg}) => {
       width:'100%'
     }}>
 
-      <Grid container spacing={{ xs: 2, md: 3 }} sx={{display:'flex',justifyContent:'flex-start',alignItems:'center',flexDirection:{xs:xs,sm:sm,md:md,lg:lg}}} >
+      <Grid container spacing={{ xs: 2, md: 1 }} sx={{display:'flex',justifyContent:'flex-start',alignItems:'center',flexDirection:{xs:xs,sm:sm,md:md,lg:lg}}} >
         { feeds && feeds.map((data, index) => (
           <Grid item  key={index} >
             <Item>
