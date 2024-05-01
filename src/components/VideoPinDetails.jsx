@@ -185,7 +185,7 @@ const VideoPinDetails = () => {
             <Box sx={{display:'flex',flexDirection:'column',flexGrow:2}}>
                 {feeds && feeds.length > 0 && ( // Check if feeds is not null and has some content
                     <>
-                        <Typography sx={{display:'flex',justifyContent:{xs:'center',sm:'flex-start',md:'center'},fontFamily:'Playfair Display',mt:3,fontWeight:'bold',fontSize:'20px',mt:5}}>
+                        <Typography sx={{display:'flex',justifyContent:{xs:'center',sm:'flex-start',md:'flex-start',lg:'center'},fontFamily:'Playfair Display',mt:3,fontWeight:'bold',fontSize:'20px',mt:5}}>
                             🔍 Recommended Video
                         </Typography>
                         <RecommendedVideo feeds={feeds} xs={"column"} sm={'row'} md={"row"} lg={'column'}/>

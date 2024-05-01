@@ -13,6 +13,7 @@ import AddIcon from '@mui/icons-material/Add';
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
 import { Avatar, Tooltip } from '@mui/material';
 import { Link, useNavigate  } from 'react-router-dom';
+import { useSearchValue } from './context/SearchProvider';
 
 
 
@@ -59,6 +60,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 
 export default function Navbar({user}) { 
+  const { setSearchText } = useSearchValue();
   const navigate=useNavigate()
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -126,6 +128,7 @@ export default function Navbar({user}) {
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"
+              onChange={(e)=>setSearchText(e.target.value)}
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>

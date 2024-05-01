@@ -1,10 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { getFirestore } from "firebase/firestore";
-import  firebaseapp  from '../firebase-config';
-import {  getAllFeeds } from "../utils/fetchData";
-import Spinner from "./Spinner";
+import React from "react";
 import  PinVideo  from "./PinVideo";
-import NotFound from "./NotFound";
 import { Grid } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';

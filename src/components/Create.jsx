@@ -1,6 +1,6 @@
 import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material'
 import { Box, Stack } from '@mui/system'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { categories } from '../data'
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import QueueIcon from '@mui/icons-material/Queue';
@@ -17,8 +17,9 @@ import {getStorage,ref,uploadBytesResumable,getDownloadURL,deleteObject} from 'f
 import firebaseapp from '../firebase-config'
 
 
-const Create = () => {
 
+
+const Create = () => {
     const editor = useRef(null);
     const [content, setContent] = useState('');
 
@@ -35,7 +36,7 @@ const Create = () => {
     const db = getFirestore(firebaseapp);
 
 
-    
+
         
     // Uploade Video
 
@@ -64,8 +65,8 @@ const Create = () => {
   })
     }
 
+    
     // Delete Video
-
     const dltVideo=()=>{
         const deleteRef=ref(storage,videoAsset)
 
