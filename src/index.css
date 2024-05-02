@@ -15,3 +15,11 @@
   background: #555; /* Color of the handle on hover */
 }
 
+
+
+/* Styles for the login page */
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
