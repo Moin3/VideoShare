@@ -94,7 +94,8 @@ const VideoPinDetails = () => {
                         <Typography>{videoInfo?.category}</Typography>
                     </Stack>
                 </Box>
-                <Box sx={{maxWidth:'640px',display:'flex',flexDirection:'column'}}>
+                <Box sx={{maxWidth:'640px',width:'100%',display:'flex',flexDirection:'column'}}>
+                    <Box sx={{display:'flex',justifyContent:'center',ml:2}}>
                     <ReactPlayer
                         url={`${videoInfo?.videoUrl}`}
                         controls={true}
@@ -102,10 +103,12 @@ const VideoPinDetails = () => {
                         width='100%'
                         // height={'100%'}
                     />
+                    </Box>
                     <Box sx={{display:'flex',flexDirection:'row',justifyContent:'space-between',mx:1,mt:1}}>
                         <Typography sx={{
                             fontSize:'11px',
-                            color:'black'
+                            color:'black',
+                            ml:2
                         }}>
                             🌍 {videoInfo?.location}
                         </Typography>
@@ -124,7 +127,7 @@ const VideoPinDetails = () => {
                         }
                     </Box>
 
-                    <Box sx={{fontWeight:'bold',fontSize:'27px',mt:1}}>
+                    <Box sx={{fontWeight:'bold',fontSize:'27px',mt:2}}>
                         🎬 {videoInfo?.title} 📽️
                     </Box>
                     <Paper elevation={0} sx={{display:'flex',alignItems:'center',p:1,mt:2,bgcolor:'#edf0f7'}}>
@@ -185,7 +188,7 @@ const VideoPinDetails = () => {
             <Box sx={{display:'flex',flexDirection:'column',flexGrow:2}}>
                 {feeds && feeds.length > 0 && ( // Check if feeds is not null and has some content
                     <>
-                        <Typography sx={{display:'flex',justifyContent:{xs:'center',sm:'flex-start',md:'flex-start',lg:'center'},fontFamily:'Playfair Display',mt:3,fontWeight:'bold',fontSize:'20px',mt:5}}>
+                        <Typography sx={{display:'flex',justifyContent:{xs:'center',sm:'flex-start',md:'flex-start',lg:'center'},fontFamily:'Playfair Display',fontWeight:'bold',fontSize:'20px',mt:5}}>
                             🔍 Recommended Video
                         </Typography>
                         <RecommendedVideo feeds={feeds} xs={"column"} sm={'row'} md={"row"} lg={'column'}/>
