@@ -127,10 +127,10 @@ const VideoPinDetails = () => {
                         }
                     </Box>
 
-                    <Box sx={{fontWeight:'bold',fontSize:'27px',mt:2}}>
+                    <Box sx={{fontWeight:'bold',fontSize:'27px',mt:2,ml:2}}>
                         🎬 {videoInfo?.title} 📽️
                     </Box>
-                    <Paper elevation={0} sx={{display:'flex',alignItems:'center',p:1,mt:2,bgcolor:'#edf0f7'}}>
+                    <Paper elevation={0} sx={{display:'flex',alignItems:'center',p:1,mt:2,ml:2,bgcolor:'#edf0f7'}}>
                         <Box sx={{display:'flex',width:'100%',justifyContent:'space-between',alignItems:'center'}}>
                             <Link to={`/userDetail/${videoInfo?.userId}`} style={{textDecoration:'none',color:'black',display:'flex',flexDirection:'row',gap:4,alignItems:'center'}}>
                                 <Avatar
@@ -154,7 +154,7 @@ const VideoPinDetails = () => {
                         {
                             open && (
                                 <Alert 
-                                    sx={{mt:2}}
+                                    sx={{mt:2,ml:2}}
                                     severity="error"
                                     action={
                                         <>
@@ -172,12 +172,12 @@ const VideoPinDetails = () => {
                             )
                         }
                     </Box>
-                    <Typography sx={{display:'flex',flexDirection:'row',alignItems:'center',fontFamily:'Playfair Display',mt:2,fontWeight:'bold',fontSize:'20px'}}>
+                    <Typography sx={{display:'flex',flexDirection:'row',alignItems:'center',fontFamily:'Playfair Display',mt:2,ml:2,fontWeight:'bold',fontSize:'20px'}}>
                         📝 Description
                     </Typography>
                     {
                         videoInfo?.content && (
-                            <Box sx={{fontFamily:'Playfair Display',mt:0,fontSize:'15px',ml:5}}>
+                            <Box sx={{fontFamily:'Playfair Display',mt:0,ml:2,fontSize:'15px',ml:5}}>
                                 {parse(videoInfo.content)}
                             </Box>
                         )
@@ -185,8 +185,8 @@ const VideoPinDetails = () => {
                     
                 </Box>
             </Box>
-            <Box sx={{display:'flex',flexDirection:'column',flexGrow:2}}>
-                {feeds && feeds.length > 0 && ( // Check if feeds is not null and has some content
+            <Box sx={{display:'flex',flexDirection:'column',flexGrow:2,ml:2}}>
+                {feeds && feeds.length > 0 && (
                     <>
                         <Typography sx={{display:'flex',justifyContent:{xs:'center',sm:'flex-start',md:'flex-start',lg:'center'},fontFamily:'Playfair Display',fontWeight:'bold',fontSize:'20px',mt:5}}>
                             🔍 Recommended Video
